@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Volume2, VolumeX, Save, Check, ChevronRight, ArrowLeft } from "lucide-react";
-import { toast } from "sonner@2.0.3";
+import { toast } from "sonner";
 
 type Scene = "beach" | "forest" | "mountain" | "meadow";
 type Sound = "waves" | "birds" | "wind" | "stream" | "silence";
