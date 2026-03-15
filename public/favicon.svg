@@ -1,1 +1,76 @@
+<svg width="110" height="110" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="plg" cx="40%" cy="34%">
+      <stop offset="0%" stop-color="#ede0ff"/>
+      <stop offset="38%" stop-color="#9b6fd4"/>
+      <stop offset="100%" stop-color="#4a3a8a"/>
+    </radialGradient>
+    <linearGradient id="rl1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b6fd4" stop-opacity="0"/>
+      <stop offset="18%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="50%" stop-color="#c4b0f7" stop-opacity="1"/>
+      <stop offset="82%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#8b6fd4" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="rl2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a484e8" stop-opacity="0"/>
+      <stop offset="20%" stop-color="#d8d0f8" stop-opacity="0.88"/>
+      <stop offset="50%" stop-color="#f0ecff" stop-opacity="0.94"/>
+      <stop offset="80%" stop-color="#d8d0f8" stop-opacity="0.88"/>
+      <stop offset="100%" stop-color="#a484e8" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="th"><rect x="0" y="0" width="110" height="55"/></clipPath>
+    <clipPath id="bh"><rect x="0" y="55" width="110" height="55"/></clipPath>
+    <clipPath id="op">
+      <path d="M0 0 H110 V110 H0 Z M55 54 m-29 0 a29 29 0 1 0 58 0 a29 29 0 1 0 -58 0"/>
+    </clipPath>
+  </defs>
 
+  <!-- Background -->
+  <rect width="110" height="110" fill="#060410" rx="22"/>
+
+  <!-- Stars -->
+  <circle cx="10" cy="14" r="1" fill="#c4b0f7" opacity="0.6"/>
+  <circle cx="95" cy="12" r="0.8" fill="#a484e8" opacity="0.7"/>
+  <circle cx="100" cy="88" r="1" fill="#c4b0f7" opacity="0.6"/>
+  <circle cx="12" cy="90" r="0.8" fill="#a484e8" opacity="0.55"/>
+  <circle cx="55" cy="6" r="0.6" fill="#c4b0f7" opacity="0.5"/>
+
+  <!-- Sparkles -->
+  <path d="M90 28 L91.2 31.5 L95 32.5 L91.2 33.5 L90 37 L88.8 33.5 L85 32.5 L88.8 31.5Z" fill="#8b6fd4" opacity="0.55"/>
+  <path d="M18 75 L19 78 L22 79 L19 80 L18 83 L17 80 L14 79 L17 78Z" fill="#c4b0f7" opacity="0.5"/>
+
+  <!-- Back top rings -->
+  <g clip-path="url(#th)" opacity="0.38">
+    <ellipse cx="55" cy="54" rx="51" ry="15" fill="none" stroke="url(#rl2)" stroke-width="3"/>
+    <ellipse cx="55" cy="54" rx="42" ry="12" fill="none" stroke="url(#rl1)" stroke-width="5"/>
+  </g>
+
+  <!-- Planet -->
+  <circle cx="55" cy="54" r="29" fill="url(#plg)"/>
+  <ellipse cx="46" cy="44" rx="9" ry="5.5" fill="white" opacity="0.13" transform="rotate(-25 46 44)"/>
+  <circle cx="42" cy="40" r="4.5" fill="white" opacity="0.22"/>
+  <circle cx="38" cy="36" r="2.2" fill="white" opacity="0.3"/>
+
+  <!-- Front bottom rings -->
+  <g clip-path="url(#bh)">
+    <ellipse cx="55" cy="54" rx="51" ry="15" fill="none" stroke="url(#rl2)" stroke-width="3" opacity="0.88"/>
+    <ellipse cx="55" cy="54" rx="42" ry="12" fill="none" stroke="url(#rl1)" stroke-width="5" opacity="0.98"/>
+  </g>
+
+  <!-- Top outside extensions -->
+  <g clip-path="url(#op)">
+    <g clip-path="url(#th)">
+      <ellipse cx="55" cy="54" rx="51" ry="15" fill="none" stroke="url(#rl2)" stroke-width="3" opacity="0.85"/>
+      <ellipse cx="55" cy="54" rx="42" ry="12" fill="none" stroke="url(#rl1)" stroke-width="5" opacity="0.95"/>
+    </g>
+  </g>
+
+  <!-- JUSTB text on bottom ring -->
+  <g clip-path="url(#bh)">
+    <path id="tp" d="M14 54 Q55 72 96 54" fill="none"/>
+    <text font-family="'Black Ops One', sans-serif" font-size="7" letter-spacing="4" fill="white" opacity="0.95">
+      <textPath href="#tp" startOffset="10%">J U S T B</textPath>
+    </text>
+  </g>
+</svg>
