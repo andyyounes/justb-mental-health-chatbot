@@ -1,5 +1,5 @@
 // supabase/functions/server/groq_handler.ts
-import { serve } from "jsr:@supabase/functions-framework@1.0.4";
+import { serve } from "jsr:@supabase/functions-framework";
 
 serve(async (req) => {
   const groqApiKey = Deno.env.get("GROQ_API_KEY");
