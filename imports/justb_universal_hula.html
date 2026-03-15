@@ -1,0 +1,222 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+  .wrap {
+    background: #060410;
+    border-radius: 24px;
+    padding: 48px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+</style>
+<div class="wrap">
+  <svg width="320" height="320" viewBox="0 0 320 320" fill="none">
+    <defs>
+      <radialGradient id="pg" cx="42%" cy="35%" r="65%">
+        <stop offset="0%" stop-color="#ddd0ff"/>
+        <stop offset="28%" stop-color="#9060e0"/>
+        <stop offset="68%" stop-color="#5828a8"/>
+        <stop offset="100%" stop-color="#100620"/>
+      </radialGradient>
+      <radialGradient id="glw" cx="50%" cy="50%">
+        <stop offset="0%" stop-color="#6030b8" stop-opacity="0.5"/>
+        <stop offset="55%" stop-color="#5020a0" stop-opacity="0.2"/>
+        <stop offset="100%" stop-color="#4010a0" stop-opacity="0"/>
+      </radialGradient>
+      <!-- Ring gradients — bright white/silver like Universal -->
+      <linearGradient id="rA" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#a090d0" stop-opacity="0"/>
+        <stop offset="18%" stop-color="#ffffff" stop-opacity="1"/>
+        <stop offset="50%" stop-color="#e0d8ff" stop-opacity="1"/>
+        <stop offset="82%" stop-color="#ffffff" stop-opacity="1"/>
+        <stop offset="100%" stop-color="#a090d0" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="rB" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#8070c0" stop-opacity="0"/>
+        <stop offset="20%" stop-color="#e8e0ff" stop-opacity="0.9"/>
+        <stop offset="50%" stop-color="#ffffff" stop-opacity="0.95"/>
+        <stop offset="80%" stop-color="#e8e0ff" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#8070c0" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="rC" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#6050b0" stop-opacity="0"/>
+        <stop offset="22%" stop-color="#c8c0e8" stop-opacity="0.8"/>
+        <stop offset="50%" stop-color="#e0d8f8" stop-opacity="0.88"/>
+        <stop offset="78%" stop-color="#c8c0e8" stop-opacity="0.8"/>
+        <stop offset="100%" stop-color="#6050b0" stop-opacity="0"/>
+      </linearGradient>
+
+      <!-- Hula hoop tilt: TOP goes behind, BOTTOM comes in front -->
+      <clipPath id="topHalf">
+        <rect x="0" y="0" width="320" height="160"/>
+      </clipPath>
+      <clipPath id="bottomHalf">
+        <rect x="0" y="160" width="320" height="160"/>
+      </clipPath>
+      <clipPath id="outsidePlanet">
+        <path d="M0 0 H320 V320 H0 Z M160 158 m-84 0 a84 84 0 1 0 168 0 a84 84 0 1 0 -168 0"/>
+      </clipPath>
+    </defs>
+
+    <!-- Dense star field -->
+    <circle cx="18" cy="22" r="1.2" fill="white" opacity="0.9"/>
+    <circle cx="48" cy="12" r="0.7" fill="white" opacity="0.7"/>
+    <circle cx="88" cy="28" r="1" fill="#c4b0f7" opacity="0.8"/>
+    <circle cx="130" cy="8" r="0.8" fill="white" opacity="0.6"/>
+    <circle cx="185" cy="15" r="1.2" fill="white" opacity="0.85"/>
+    <circle cx="228" cy="8" r="0.7" fill="#c4b0f7" opacity="0.7"/>
+    <circle cx="268" cy="22" r="1.5" fill="white" opacity="0.9"/>
+    <circle cx="298" cy="48" r="0.8" fill="white" opacity="0.7"/>
+    <circle cx="308" cy="88" r="1" fill="#c4b0f7" opacity="0.6"/>
+    <circle cx="312" cy="135" r="0.7" fill="white" opacity="0.8"/>
+    <circle cx="305" cy="185" r="1.2" fill="white" opacity="0.7"/>
+    <circle cx="295" cy="228" r="0.8" fill="#c4b0f7" opacity="0.6"/>
+    <circle cx="275" cy="268" r="1.5" fill="white" opacity="0.85"/>
+    <circle cx="238" cy="295" r="0.8" fill="white" opacity="0.7"/>
+    <circle cx="192" cy="308" r="1" fill="#c4b0f7" opacity="0.6"/>
+    <circle cx="145" cy="312" r="0.7" fill="white" opacity="0.8"/>
+    <circle cx="98" cy="302" r="1.2" fill="white" opacity="0.7"/>
+    <circle cx="55" cy="280" r="0.8" fill="#c4b0f7" opacity="0.65"/>
+    <circle cx="22" cy="252" r="1.5" fill="white" opacity="0.8"/>
+    <circle cx="10" cy="208" r="0.7" fill="white" opacity="0.7"/>
+    <circle cx="8" cy="162" r="1" fill="#c4b0f7" opacity="0.6"/>
+    <circle cx="12" cy="115" r="0.7" fill="white" opacity="0.75"/>
+    <circle cx="22" cy="72" r="1" fill="white" opacity="0.65"/>
+    <!-- Mid field stars -->
+    <circle cx="65" cy="65" r="0.6" fill="#ede0ff" opacity="0.7"/>
+    <circle cx="255" cy="55" r="0.6" fill="#c4b0f7" opacity="0.65"/>
+    <circle cx="272" cy="255" r="0.7" fill="#ede0ff" opacity="0.6"/>
+    <circle cx="52" cy="258" r="0.6" fill="#c4b0f7" opacity="0.6"/>
+    <circle cx="160" cy="18" r="0.8" fill="white" opacity="0.5"/>
+    <circle cx="160" cy="302" r="0.7" fill="white" opacity="0.5"/>
+
+    <!-- 4-point stars scattered -->
+    <path d="M262 35 L264 41 L270 43 L264 45 L262 51 L260 45 L254 43 L260 41Z" fill="white" opacity="0.9"/>
+    <path d="M48 268 L50 274 L56 276 L50 278 L48 284 L46 278 L40 276 L46 274Z" fill="#c4b0f7" opacity="0.85"/>
+    <path d="M298 148 L299.5 153 L305 155 L299.5 157 L298 162 L296.5 157 L291 155 L296.5 153Z" fill="white" opacity="0.75"/>
+    <path d="M18 148 L19.5 153 L25 155 L19.5 157 L18 162 L16.5 157 L11 155 L16.5 153Z" fill="#a484e8" opacity="0.7"/>
+    <path d="M148 298 L149.5 303 L155 305 L149.5 307 L148 312 L146.5 307 L141 305 L146.5 303Z" fill="white" opacity="0.7"/>
+    <path d="M165 8 L166.5 13 L172 15 L166.5 17 L165 22 L163.5 17 L158 15 L163.5 13Z" fill="#c4b0f7" opacity="0.75"/>
+
+    <!-- Aura glow -->
+    <ellipse cx="160" cy="158" rx="118" ry="115" fill="url(#glw)"/>
+
+    <!-- ══ STEP 1: TOP halves of rings go BEHIND planet ══ -->
+    <g clip-path="url(#topHalf)" opacity="0.42">
+      <ellipse cx="160" cy="158" rx="148" ry="44" fill="none" stroke="url(#rC)" stroke-width="3.5" transform="rotate(0 160 158)"/>
+      <ellipse cx="160" cy="158" rx="128" ry="36" fill="none" stroke="url(#rB)" stroke-width="6" transform="rotate(0 160 158)"/>
+      <ellipse cx="160" cy="158" rx="110" ry="30" fill="none" stroke="url(#rA)" stroke-width="9" transform="rotate(0 160 158)"/>
+    </g>
+
+    <!-- ══ STEP 2: Planet ══ -->
+    <circle cx="160" cy="158" r="84" fill="url(#pg)"/>
+    <ellipse cx="134" cy="126" rx="35" ry="20" fill="white" opacity="0.12" transform="rotate(-30 134 126)"/>
+    <circle cx="125" cy="120" r="14" fill="white" opacity="0.17"/>
+    <circle cx="118" cy="113" r="7" fill="white" opacity="0.24"/>
+    <!-- Moon -->
+    <circle cx="195" cy="90" r="5.5" fill="#8040c8" opacity="0.9"/>
+    <ellipse cx="195" cy="90" rx="13" ry="4" fill="none" stroke="#c4b0f7" stroke-width="1.2" opacity="0.65" transform="rotate(-10 195 90)"/>
+
+    <!-- ══ STEP 3: BOTTOM halves of rings come IN FRONT ══ -->
+    <g clip-path="url(#bottomHalf)">
+      <ellipse cx="160" cy="158" rx="148" ry="44" fill="none" stroke="url(#rC)" stroke-width="3.5" opacity="0.78"/>
+      <ellipse cx="160" cy="158" rx="128" ry="36" fill="none" stroke="url(#rB)" stroke-width="6" opacity="0.9"/>
+      <ellipse cx="160" cy="158" rx="110" ry="30" fill="none" stroke="url(#rA)" stroke-width="9" opacity="0.98"/>
+    </g>
+
+    <!-- Left/right extensions outside planet, top half — bright ends -->
+    <g clip-path="url(#outsidePlanet)">
+      <g clip-path="url(#topHalf)">
+        <ellipse cx="160" cy="158" rx="148" ry="44" fill="none" stroke="url(#rC)" stroke-width="3.5" opacity="0.82"/>
+        <ellipse cx="160" cy="158" rx="128" ry="36" fill="none" stroke="url(#rB)" stroke-width="6" opacity="0.92"/>
+        <ellipse cx="160" cy="158" rx="110" ry="30" fill="none" stroke="url(#rA)" stroke-width="9" opacity="0.96"/>
+      </g>
+    </g>
+
+    <!-- ══ STEP 4: JUSTB text across the BOTTOM front ring ══ -->
+    <!-- Text spans the full front-facing bottom portion — Universal style -->
+    <g clip-path="url(#bottomHalf)">
+      <path id="textPath1" d="M52 158 Q160 202 268 158" fill="none"/>
+      <text font-family="'Black Ops One', sans-serif" font-size="17" letter-spacing="14" fill="white" opacity="0.98">
+        <textPath href="#textPath1" startOffset="8%">J U S T B</textPath>
+      </text>
+    </g>
+
+    <!-- Orbiting particles -->
+    <circle cx="80" cy="118" r="4" fill="#c4b0f7" opacity="0.7"/>
+    <circle cx="242" cy="108" r="3.5" fill="#a484e8" opacity="0.65"/>
+    <circle cx="228" cy="210" r="4" fill="#c4b0f7" opacity="0.55"/>
+    <circle cx="92" cy="208" r="3" fill="#ede0ff" opacity="0.65"/>
+    <circle cx="160" cy="72" r="3" fill="#c4b0f7" opacity="0.5"/>
+  </svg>
+
+  <!-- Light version -->
+  <div style="background:#f7f4ff;border-radius:20px;padding:22px 38px;display:flex;flex-direction:column;align-items:center;gap:12px;">
+    <svg width="110" height="110" viewBox="0 0 110 110" fill="none">
+      <defs>
+        <radialGradient id="plg" cx="40%" cy="34%">
+          <stop offset="0%" stop-color="#ede0ff"/>
+          <stop offset="38%" stop-color="#9b6fd4"/>
+          <stop offset="100%" stop-color="#4a3a8a"/>
+        </radialGradient>
+        <linearGradient id="rl1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#8b6fd4" stop-opacity="0"/>
+          <stop offset="18%" stop-color="#ffffff" stop-opacity="0.95"/>
+          <stop offset="50%" stop-color="#c4b0f7" stop-opacity="1"/>
+          <stop offset="82%" stop-color="#ffffff" stop-opacity="0.95"/>
+          <stop offset="100%" stop-color="#8b6fd4" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="rl2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#a484e8" stop-opacity="0"/>
+          <stop offset="20%" stop-color="#d8d0f8" stop-opacity="0.88"/>
+          <stop offset="50%" stop-color="#f0ecff" stop-opacity="0.94"/>
+          <stop offset="80%" stop-color="#d8d0f8" stop-opacity="0.88"/>
+          <stop offset="100%" stop-color="#a484e8" stop-opacity="0"/>
+        </linearGradient>
+        <clipPath id="th2"><rect x="0" y="0" width="110" height="55"/></clipPath>
+        <clipPath id="bh2"><rect x="0" y="55" width="110" height="55"/></clipPath>
+        <clipPath id="op2">
+          <path d="M0 0 H110 V110 H0 Z M55 54 m-29 0 a29 29 0 1 0 58 0 a29 29 0 1 0 -58 0"/>
+        </clipPath>
+      </defs>
+      <!-- Stars -->
+      <circle cx="10" cy="14" r="1" fill="#c4b0f7" opacity="0.6"/>
+      <circle cx="95" cy="12" r="0.8" fill="#a484e8" opacity="0.7"/>
+      <circle cx="100" cy="88" r="1" fill="#c4b0f7" opacity="0.6"/>
+      <circle cx="12" cy="90" r="0.8" fill="#a484e8" opacity="0.55"/>
+      <path d="M90 28 L91.2 31.5 L95 32.5 L91.2 33.5 L90 37 L88.8 33.5 L85 32.5 L88.8 31.5Z" fill="#8b6fd4" opacity="0.55"/>
+      <path d="M18 75 L19 78 L22 79 L19 80 L18 83 L17 80 L14 79 L17 78Z" fill="#c4b0f7" opacity="0.5"/>
+      <!-- Back top rings -->
+      <g clip-path="url(#th2)" opacity="0.38">
+        <ellipse cx="55" cy="54" rx="51" ry="15" fill="none" stroke="url(#rl2)" stroke-width="3"/>
+        <ellipse cx="55" cy="54" rx="42" ry="12" fill="none" stroke="url(#rl1)" stroke-width="5"/>
+      </g>
+      <!-- Planet -->
+      <circle cx="55" cy="54" r="29" fill="url(#plg)"/>
+      <circle cx="46" cy="44" r="9" fill="white" opacity="0.13"/>
+      <circle cx="42" cy="40" r="4.5" fill="white" opacity="0.22"/>
+      <!-- Front bottom rings -->
+      <g clip-path="url(#bh2)">
+        <ellipse cx="55" cy="54" rx="51" ry="15" fill="none" stroke="url(#rl2)" stroke-width="3" opacity="0.88"/>
+        <ellipse cx="55" cy="54" rx="42" ry="12" fill="none" stroke="url(#rl1)" stroke-width="5" opacity="0.98"/>
+      </g>
+      <!-- Top outside extensions -->
+      <g clip-path="url(#op2)">
+        <g clip-path="url(#th2)">
+          <ellipse cx="55" cy="54" rx="51" ry="15" fill="none" stroke="url(#rl2)" stroke-width="3" opacity="0.85"/>
+          <ellipse cx="55" cy="54" rx="42" ry="12" fill="none" stroke="url(#rl1)" stroke-width="5" opacity="0.95"/>
+        </g>
+      </g>
+      <!-- JUSTB text bottom -->
+      <g clip-path="url(#bh2)">
+        <path id="tp2" d="M14 54 Q55 72 96 54" fill="none"/>
+        <text font-family="'Black Ops One', sans-serif" font-size="7" letter-spacing="4" fill="#2d1a5e" opacity="0.95">
+          <textPath href="#tp2" startOffset="10%">J U S T B</textPath>
+        </text>
+      </g>
+    </svg>
+    <div style="font-family:'Black Ops One',sans-serif;font-size:18px;color:#4a3a8a;letter-spacing:5px;">JUSTB</div>
+  </div>
+</div>
