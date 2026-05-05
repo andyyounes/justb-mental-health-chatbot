@@ -266,9 +266,9 @@ Response protocol:
 - Prominently display the local crisis hotline. If you can detect the user's country or region from context, provide the specific local number. Default to:
   - 🇺🇸 USA: **988** (Suicide & Crisis Lifeline — call or text)
   - 🇬🇧 UK: **116 123** (Samaritans)
-  - 🇦🇺 AU: **13 11 14** (Lifeline)
+  - 🇦🇺 AU: **+61 13 11 14** (Lifeline)
   - 🇨🇦 CA: **1-833-456-4566**
-  - 🇦🇲 Armenia: **113** (emergency) + **8-000-1-800** (mental health)
+  - 🇦🇲 Armenia: **+374 80 001 800** (crisis) + **911** (emergency)
   - 🇱🇧 Lebanon: **1564** (Embrace NGO) + **140** (emergency)
   - 🇮🇹 Italy: **800 274 274** + **118** (emergency)
   - 🇫🇷 France: **3114** (national crisis line) + **15** (emergency)

@@ -62,6 +62,7 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState<
     "chat" | "activities" | "tasks"
   >("chat");
+  const [activitiesExercise, setActivitiesExercise] = useState<string | null>(null); // exercise to auto-launch
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -88,6 +89,78 @@ export default function App() {
   const [isListening, setIsListening] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // ====== FAVICON — JustB planet logo (onboarding dark style) ======
+  useEffect(() => {
+    const svgFavicon = [
+      '<svg xmlns="http://www.w3.org/2000/svg" width="110" height="110" viewBox="0 0 110 110" fill="none">',
+      '<defs>',
+      '<radialGradient id="fpg" cx="40%" cy="34%" r="70%">',
+      '<stop offset="0%" stop-color="#ddd0ff"/>',
+      '<stop offset="28%" stop-color="#9060e0"/>',
+      '<stop offset="68%" stop-color="#5828a8"/>',
+      '<stop offset="100%" stop-color="#100620"/>',
+      '</radialGradient>',
+      '<linearGradient id="frl1" x1="0%" y1="0%" x2="100%" y2="100%">',
+      '<stop offset="0%" stop-color="#8b6fd4" stop-opacity="0"/>',
+      '<stop offset="18%" stop-color="#ffffff" stop-opacity="0.95"/>',
+      '<stop offset="50%" stop-color="#c4b0f7" stop-opacity="1"/>',
+      '<stop offset="82%" stop-color="#ffffff" stop-opacity="0.95"/>',
+      '<stop offset="100%" stop-color="#8b6fd4" stop-opacity="0"/>',
+      '</linearGradient>',
+      '<linearGradient id="frl2" x1="0%" y1="0%" x2="100%" y2="100%">',
+      '<stop offset="0%" stop-color="#a484e8" stop-opacity="0"/>',
+      '<stop offset="20%" stop-color="#d8d0f8" stop-opacity="0.88"/>',
+      '<stop offset="50%" stop-color="#f0ecff" stop-opacity="0.94"/>',
+      '<stop offset="80%" stop-color="#d8d0f8" stop-opacity="0.88"/>',
+      '<stop offset="100%" stop-color="#a484e8" stop-opacity="0"/>',
+      '</linearGradient>',
+      '<clipPath id="fth"><rect x="0" y="0" width="110" height="55"/></clipPath>',
+      '<clipPath id="fbh"><rect x="0" y="55" width="110" height="55"/></clipPath>',
+      '<clipPath id="fop"><path d="M0 0 H110 V110 H0 Z M55 54 m-29 0 a29 29 0 1 0 58 0 a29 29 0 1 0 -58 0"/></clipPath>',
+      '</defs>',
+      '<rect width="110" height="110" rx="24" fill="#060410"/>',
+      '<circle cx="10" cy="14" r="1" fill="white" opacity="0.6"/>',
+      '<circle cx="95" cy="12" r="0.8" fill="#c4b0f7" opacity="0.7"/>',
+      '<circle cx="100" cy="88" r="1" fill="white" opacity="0.6"/>',
+      '<circle cx="12" cy="90" r="0.8" fill="#c4b0f7" opacity="0.55"/>',
+      '<circle cx="55" cy="6" r="0.6" fill="white" opacity="0.5"/>',
+      '<path d="M90 28 L91.2 31.5 L95 32.5 L91.2 33.5 L90 37 L88.8 33.5 L85 32.5 L88.8 31.5Z" fill="#c4b0f7" opacity="0.55"/>',
+      '<g clip-path="url(#fth)" opacity="0.38">',
+      '<ellipse cx="55" cy="54" rx="51" ry="15" fill="none" stroke="url(#frl2)" stroke-width="3"/>',
+      '<ellipse cx="55" cy="54" rx="42" ry="12" fill="none" stroke="url(#frl1)" stroke-width="5"/>',
+      '</g>',
+      '<circle cx="55" cy="54" r="29" fill="url(#fpg)"/>',
+      '<circle cx="42" cy="40" r="4.5" fill="white" opacity="0.22"/>',
+      '<circle cx="38" cy="36" r="2.2" fill="white" opacity="0.3"/>',
+      '<g clip-path="url(#fbh)">',
+      '<ellipse cx="55" cy="54" rx="51" ry="15" fill="none" stroke="url(#frl2)" stroke-width="3" opacity="0.88"/>',
+      '<ellipse cx="55" cy="54" rx="42" ry="12" fill="none" stroke="url(#frl1)" stroke-width="5" opacity="0.98"/>',
+      '</g>',
+      '<g clip-path="url(#fop)"><g clip-path="url(#fth)">',
+      '<ellipse cx="55" cy="54" rx="51" ry="15" fill="none" stroke="url(#frl2)" stroke-width="3" opacity="0.85"/>',
+      '<ellipse cx="55" cy="54" rx="42" ry="12" fill="none" stroke="url(#frl1)" stroke-width="5" opacity="0.95"/>',
+      '</g></g>',
+      '<g clip-path="url(#fbh)">',
+      '<path id="ftp" d="M14 54 Q55 72 96 54" fill="none"/>',
+      '<text font-family="Black Ops One, sans-serif" font-size="7" letter-spacing="4" fill="white" opacity="0.95">',
+      '<textPath href="#ftp" startOffset="10%">J U S T B</textPath>',
+      '</text>',
+      '</g>',
+      '</svg>',
+    ].join('');
+
+    const encoded = 'data:image/svg+xml,' + encodeURIComponent(svgFavicon);
+    let link = document.querySelector<HTMLLinkElement>("link[rel~='icon']");
+    if (!link) {
+      link = document.createElement('link');
+      link.rel = 'icon';
+      document.head.appendChild(link);
+    }
+    link.type = 'image/svg+xml';
+    link.href = encoded;
+    document.title = 'JustB — no filters. just you.';
+  }, []);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const recognitionRef = useRef<any>(null);
 
@@ -818,7 +891,26 @@ const handleClearHistory = async () => {
     }
 
     if (action.type === "exercise") {
-      toast.success(`Great! Let's try ${action.title}`);
+      // Map action ID → specific exercise key in ActivitiesPage
+      const EXERCISE_MAP: Record<string, string> = {
+        "478-breathing":     "box-breathing",
+        "box-breathing":     "box-breathing",
+        "sleep-breathing":   "box-breathing",
+        "cooling-breath":    "box-breathing",
+        "energizing-breath": "box-breathing",
+        "grounding":         "grounding",
+        "visualization":     "visualization",
+        "safe-place":        "visualization",
+        "pmr":               "pmr",
+        "body-scan":         "pmr",
+        "gentle-movement":   "pmr",
+        "mindful-walk":      "pmr",
+        "gratitude":         "journaling",
+        "self-compassion":   "journaling",
+        "findahelpline":     "", // no exercise to launch
+      };
+      const exerciseKey = EXERCISE_MAP[action.id] ?? null;
+      setActivitiesExercise(exerciseKey || null);
       setCurrentPage("activities");
       return;
     }
@@ -864,8 +956,9 @@ const handleClearHistory = async () => {
   if (currentPage === "activities") {
     return (
       <ActivitiesPage
-        onBack={() => setCurrentPage("chat")}
+        onBack={() => { setCurrentPage("chat"); setActivitiesExercise(null); }}
         onNavigateToTasks={() => setCurrentPage("tasks")}
+        startExercise={activitiesExercise}
       />
     );
   }
@@ -1325,7 +1418,7 @@ const handleClearHistory = async () => {
                   letterSpacing: "0.02em",
                 }}
               >
-                crisis support · 988 · 116 123 · 13 11 14
+                crisis support · 988 · 116 123 · +61 13 11 14
               </p>
             </div>
           </div>
