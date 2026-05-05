@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BoxBreathing } from "./BoxBreathing";
 import { GroundingExercise } from "./GroundingExercise";
 import { ProgressiveMuscleRelaxation } from "./ProgressiveMuscleRelaxation";
@@ -11,6 +11,7 @@ import { LogoWidget } from "./JustBLogo";
 interface ActivitiesPageProps {
   onBack: () => void;
   onNavigateToTasks?: () => void;
+  startExercise?: string | null; // NEW — auto-launch a specific exercise from chat
 }
 
 // ── shared style tokens ──────────────────────────────────────────
@@ -250,9 +251,31 @@ function QuickCard({
 }
 
 // ── main component ────────────────────────────────────────────────
-export function ActivitiesPage({ onBack, onNavigateToTasks }: ActivitiesPageProps) {
+export function ActivitiesPage({ onBack, onNavigateToTasks, startExercise }: ActivitiesPageProps) {
   const [activeExercise, setActiveExercise] = useState<string | null>(null);
 
+  // Auto-launch the exercise that the user accepted from the chat action card
+  useEffect(() => {
+    if (startExercise) {
+      setActiveExercise(startExercise);
+    }
+  }, [startExercise]);
+
+  // ── Full-screen exercise sub-pages ───────────────────────────────────────
+  if (activeExercise === "box-breathing") {
+    return (
+      <ExerciseShell onBack={() => setActiveExercise(null)}>
+        <BoxBreathing />
+      </ExerciseShell>
+    );
+  }
+  if (activeExercise === "grounding") {
+    return (
+      <ExerciseShell onBack={() => setActiveExercise(null)}>
+        <GroundingExercise />
+      </ExerciseShell>
+    );
+  }
   if (activeExercise === "pmr") {
     return (
       <ExerciseShell onBack={() => setActiveExercise(null)}>
