@@ -159,7 +159,7 @@ export default function App() {
     }
     link.type = 'image/svg+xml';
     link.href = encoded;
-    document.title = 'JustB — no filters. just you.';
+    document.title = 'JustB';
   }, []);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const recognitionRef = useRef<any>(null);
