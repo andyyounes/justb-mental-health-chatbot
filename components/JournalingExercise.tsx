@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Camera, Trash2, ArrowLeft, BookOpen, ChevronRight } from "lucide-react";
-import { toast } from "sonner@2.0.3";
+import { toast } from "sonner";
 
 interface JournalEntry {
   id: string;
