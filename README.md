@@ -1,17 +1,17 @@
-# JustB - Mental Health Chatbot 🌙
+# JustB - Mental Health Chatbot 
 
 A compassionate mental health chatbot providing empathetic support for anxiety, stress, sleep, relationships, and mood. Built with React, TypeScript, and powered by Groq's LLaMA 3.3 70B.
 
-## ✨ Features
+## Features
 
-### 🤖 Conversational AI Chat
+### Conversational AI Chat
 - **Short, friendly responses** - Like texting a supportive friend (2-3 sentences max)
 - **Quick topic buttons** - Fast access to anxiety, stress, sleep, relationships, and mood support
 - **Smart action cards** - Dynamic suggestions based on conversation context
 - **3-level risk assessment** - Automatic crisis detection with appropriate interventions
 - **Chat history** - Browse past conversations with AI-generated titles
 
-### 🧘 Calming Activities
+### Calming Activities
 - Box breathing exercise with visual guide
 - Grounding techniques (5-4-3-2-1)
 - Progressive muscle relaxation
@@ -20,24 +20,24 @@ A compassionate mental health chatbot providing empathetic support for anxiety, 
 - Journaling prompts
 - Breathing cat animation
 
-### 📅 Task Scheduling
+### Task Scheduling
 - Google Calendar integration
 - AI-powered task recommendations
 - Schedule management for self-care activities
 
-### 🎨 Beautiful, Responsive Design
+### Beautiful, Responsive Design
 - **Fully responsive** - Optimized for mobile (~375px), tablet (~768px), and desktop (1024px+)
 - **Dark/Light mode** - Automatic theme detection with manual override
 - **Soft lavender aesthetic** - Calming colors with smooth gradients
 - **Safe area support** - Works perfectly with notch/Dynamic Island/home indicator
 - **Custom typography** - DM Sans for body, Black Ops One for logo
 
-### 🔒 Privacy & Security
+### Privacy & Security
 - Anonymous authentication via Supabase
 - No personal data collection
 - Secure backend with Supabase Edge Functions
 
-## 🚀 Tech Stack
+## Tech Stack
 
 - **Frontend**: React, TypeScript, Tailwind CSS v4
 - **Backend**: Supabase (Auth, Database, Edge Functions)
@@ -45,7 +45,7 @@ A compassionate mental health chatbot providing empathetic support for anxiety, 
 - **Server**: Hono web framework on Deno
 - **Styling**: CSS custom properties with dark mode support
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 /
@@ -78,7 +78,7 @@ A compassionate mental health chatbot providing empathetic support for anxiety, 
 
 ```
 
-## 🎨 Design System
+## Design System
 
 ### Color Palette (Dark Mode)
 - Background: `#1e1a3f` (deep lavender)
@@ -98,7 +98,7 @@ A compassionate mental health chatbot providing empathetic support for anxiety, 
 
 Uses `clamp()` for fluid scaling and `dvh` units for viewport height.
 
-## 🛠️ Setup & Development
+## Setup & Development
 
 ### Prerequisites
 - Node.js 18+
@@ -139,19 +139,19 @@ npm run dev
    supabase functions deploy make-server-97cb3ddd
    ```
 
-## 🤖 AI Response Guidelines
+## AI Response Guidelines
 
 JustB follows strict conversational guidelines:
-- ✅ 2-3 short sentences maximum
-- ✅ Friendly, supportive tone
-- ✅ Line breaks between thoughts
-- ✅ No bullet points or lists
-- ✅ No formal therapy language
-- ❌ Never start with "I"
-- ❌ No long paragraphs
-- ❌ No clinical terminology
+- 2-3 short sentences maximum
+- Friendly, supportive tone
+- Line breaks between thoughts
+- No bullet points or lists
+- No formal therapy language
+- Never start with "I"
+- No long paragraphs
+- No clinical terminology
 
-## 🆘 Crisis Response System
+## Crisis Response System
 
 ### Level 1: Mild Concern
 - Affirming message
@@ -169,18 +169,18 @@ JustB follows strict conversational guidelines:
 - Grounding exercises
 - Red-themed urgent card
 
-## 📝 License
+## License
 
 MIT License - See LICENSE file for details
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - [shadcn/ui](https://ui.shadcn.com/) - UI components (MIT License)
 - [Unsplash](https://unsplash.com) - Stock photos (Unsplash License)
 - [Groq](https://groq.com/) - LLM inference
 - [Supabase](https://supabase.com/) - Backend infrastructure
 
-## 🔗 Links
+## Links
 
 - **Repository**: [github.com/andyyounes/justb-mental-health-chatbot](https://github.com/andyyounes/justb-mental-health-chatbot)
 - **Issues**: [Report a bug or request a feature](https://github.com/andyyounes/justb-mental-health-chatbot/issues)
