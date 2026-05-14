@@ -13,9 +13,8 @@ import {
   Plus,
   X,
 } from "lucide-react";
-import { toast } from "sonner";
+import { toast } from "sonner@2.0.3";
 import { LogoWidget } from "./JustBLogo";
-
 // ── types ────────────────────────────────────────────────────────
 interface Task {
   id: string;
@@ -309,10 +308,9 @@ export function SchedulePage({ onBack }: SchedulePageProps) {
   const [dismissedTasks, setDismissedTasks] = useState<Set<string>>(new Set());
 
   const handleAdd = (task: Task) => {
-    const link = createGoogleCalendarLink(task);
-    window.open(link, "_blank");
+    window.open(createGoogleCalendarLink(task), "_blank");
     setAddedTasks((prev) => new Set([...prev, task.id]));
-    toast.success(`"${task.title}" opened in Google Calendar`);
+    toast.success(`${task.title} added to your calendar!`);
   };
 
   const handleDismiss = (id: string) => {

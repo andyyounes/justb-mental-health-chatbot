@@ -393,15 +393,19 @@ export default function App() {
           ? "haven't seen you in a bit — how have you been holding up? 💙"
           : "hey, good to see you.\n\nwhat's on your mind today?";
 
+        const followUp = getCrisisFollowUpText();
+        if (followUp) markCrisisFollowUpShown();
+
         setMessages([
           {
             id: "1",
-            text: welcomeText,
+            text: followUp ?? welcomeText,
             isBot: true,
             timestamp: new Date().toLocaleTimeString([], {
               hour: "2-digit",
               minute: "2-digit",
             }),
+            ...(followUp ? { isPostCrisis: true } : {}),
           },
         ]);
         // Show mood check-in for every new session
@@ -429,9 +433,22 @@ export default function App() {
         const data = await response.json();
 
         if (data.messages && data.messages.length > 0) {
-          setMessages((prev) =>
-            mergeMessagesPreservingActions(data.messages, prev)
-          );
+          const followUp = getCrisisFollowUpText();
+          if (followUp) {
+            markCrisisFollowUpShown();
+            const followUpMsg: Message = {
+              id: `follow-up-${Date.now()}`,
+              text: followUp,
+              isBot: true,
+              timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+              isPostCrisis: true,
+            };
+            setMessages((prev) => [...mergeMessagesPreservingActions(data.messages, prev), followUpMsg]);
+          } else {
+            setMessages((prev) =>
+              mergeMessagesPreservingActions(data.messages, prev)
+            );
+          }
           setShowMoodCheckIn(false); // existing session — skip mood check-in
         } else {
           setMessages([
@@ -492,6 +509,49 @@ export default function App() {
     } catch (error) {
       console.error("Error saving message:", error);
     }
+  };
+
+  // =================================================================
+  // Crisis follow-up helpers
+  // =================================================================
+  const getCrisisFollowUpText = (): string | null => {
+    const raw = localStorage.getItem("justb_last_crisis");
+    if (!raw) return null;
+    let crisis: { level: number; timestamp: number; sessionId: string; lastShownAt?: number };
+    try { crisis = JSON.parse(raw); } catch { return null; }
+
+    const now = Date.now();
+    const hoursElapsed = (now - crisis.timestamp) / (1000 * 60 * 60);
+    const daysElapsed = hoursElapsed / 24;
+
+    if (daysElapsed > 7) {
+      localStorage.removeItem("justb_last_crisis");
+      return null;
+    }
+    if (crisis.lastShownAt && (now - crisis.lastShownAt) / (1000 * 60 * 60) < 20) return null;
+    if (hoursElapsed < 24) return null;
+
+    if (daysElapsed >= 7) {
+      return "it's been a week since you were going through something difficult. i'm here if you want to talk.";
+    } else if (daysElapsed >= 3) {
+      return "sometimes tough feelings come in waves. how have things been since we last spoke?";
+    } else {
+      return "hey, just checking in — how are you feeling today compared to yesterday?";
+    }
+  };
+
+  const markCrisisFollowUpShown = () => {
+    const raw = localStorage.getItem("justb_last_crisis");
+    if (!raw) return;
+    try {
+      const crisis = JSON.parse(raw);
+      const daysElapsed = (Date.now() - crisis.timestamp) / (1000 * 60 * 60 * 24);
+      if (daysElapsed >= 7) {
+        localStorage.removeItem("justb_last_crisis");
+      } else {
+        localStorage.setItem("justb_last_crisis", JSON.stringify({ ...crisis, lastShownAt: Date.now() }));
+      }
+    } catch {}
   };
 
   // =================================================================
@@ -617,6 +677,11 @@ export default function App() {
         setChatSessions(prev => prev.map(s =>
           s.id === currentSessionId ? { ...s, hasCrisis: true } : s
         ));
+        localStorage.setItem("justb_last_crisis", JSON.stringify({
+          level: data.crisisLevel,
+          timestamp: Date.now(),
+          sessionId: currentSessionId,
+        }));
       }
       // Tier 3 crisis: show undismissable emergency modal
       if (data.crisisLevel === 3) {
@@ -916,12 +981,7 @@ const handleClearHistory = async () => {
     }
 
     if (action.type === "task") {
-      addToCalendar({
-        title: action.title,
-        description: action.description,
-        startTime: action.time,
-        duration: 30,
-      });
+      addToCalendar({ title: action.title, description: action.description, startTime: action.time, duration: 30 });
       toast.success(`${action.title} added to your calendar!`);
       return;
     }
