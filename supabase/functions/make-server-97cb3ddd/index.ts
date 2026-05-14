@@ -413,7 +413,7 @@ app.post("/make-server-97cb3ddd/chat", async (c) => {
     const systemPrompt = buildSystemPrompt(casualMode, ragContext);
 
     const chatMessages = [
-      ...(chatHistory || []).slice(-10),
+      ...(chatHistory || []),
       { role: "user", content: message },
     ];
 
