@@ -109,7 +109,11 @@ export function AuthPage({ onAuthSuccess }: AuthPageProps) {
       {mode === "login" ? (
         <LoginForm
           onLogin={handleLogin}
-          onGuestLogin={() => handleLogin("guest", "justb2026")}
+          onGuestLogin={async () => {
+            const username = `guest_${Date.now()}`;
+            const password = Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
+            await handleSignup(username, password, "Guest");
+          }}
           onSwitchToSignup={() => {
             setMode("signup");
             setError(null);

@@ -1130,7 +1130,7 @@ const handleClearHistory = async () => {
             <div style={{ flex: 1 }} />
 
             {/* Guest Mode chip */}
-            {username === "guest" && (
+            {(username === "guest" || username.startsWith("guest_")) && (
               <span style={{
                 fontFamily: "'DM Sans', system-ui, sans-serif",
                 fontSize: 11, fontWeight: 500,
