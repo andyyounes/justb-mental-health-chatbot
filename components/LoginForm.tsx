@@ -3,12 +3,13 @@ import { Loader2, Eye, EyeOff } from "lucide-react";
 
 interface LoginFormProps {
   onLogin: (username: string, password: string) => Promise<void>;
+  onGuestLogin: () => Promise<void>;
   onSwitchToSignup: () => void;
   error: string | null;
   isLoading: boolean;
 }
 
-export function LoginForm({ onLogin, onSwitchToSignup, error, isLoading }: LoginFormProps) {
+export function LoginForm({ onLogin, onGuestLogin, onSwitchToSignup, error, isLoading }: LoginFormProps) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -188,6 +189,40 @@ export function LoginForm({ onLogin, onSwitchToSignup, error, isLoading }: Login
             {isLoading ? (
               <><Loader2 size={16} style={{ animation: "spin 1s linear infinite" }} /> signing in…</>
             ) : "sign in"}
+          </button>
+
+          {/* Divider */}
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 4 }}>
+            <div style={{ flex: 1, height: 1, background: "var(--jb-border-2)" }} />
+            <span style={{ fontSize: 11, color: "rgba(109,40,217,0.35)", fontFamily: "'DM Sans', system-ui, sans-serif" }}>or</span>
+            <div style={{ flex: 1, height: 1, background: "var(--jb-border-2)" }} />
+          </div>
+
+          {/* Guest button */}
+          <button
+            type="button"
+            onClick={onGuestLogin}
+            disabled={isLoading}
+            style={{
+              width: "100%",
+              background: "transparent",
+              border: "1.5px solid rgba(139,92,246,0.3)",
+              borderRadius: 100,
+              padding: "13px 20px",
+              fontFamily: "'DM Sans', system-ui, sans-serif",
+              fontWeight: 400,
+              fontSize: 14,
+              color: isLoading ? "rgba(109,40,217,0.3)" : "rgba(109,40,217,0.7)",
+              cursor: isLoading ? "not-allowed" : "pointer",
+              display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+              transition: "all 0.2s",
+            }}
+            onMouseEnter={e => { if (!isLoading) e.currentTarget.style.background = "rgba(139,92,246,0.06)"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}
+          >
+            {isLoading ? (
+              <><Loader2 size={14} style={{ animation: "spin 1s linear infinite" }} /> loading…</>
+            ) : "try as guest"}
           </button>
         </form>
 

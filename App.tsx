@@ -35,7 +35,7 @@ import {
   MicOff,
 } from "lucide-react";
 import { Toaster } from "./components/ui/sonner";
-import { toast } from "sonner";
+import { toast } from "sonner@2.0.3";
 import { projectId } from "./utils/supabase/info";
 import { addToCalendar } from "./utils/calendar";
 
@@ -159,7 +159,7 @@ export default function App() {
     }
     link.type = 'image/svg+xml';
     link.href = encoded;
-    document.title = 'JustB';
+    document.title = 'JustB — no filters. just you.';
   }, []);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const recognitionRef = useRef<any>(null);
@@ -1128,6 +1128,23 @@ const handleClearHistory = async () => {
 
             {/* Spacer pushes avatar to the right */}
             <div style={{ flex: 1 }} />
+
+            {/* Guest Mode chip */}
+            {username === "guest" && (
+              <span style={{
+                fontFamily: "'DM Sans', system-ui, sans-serif",
+                fontSize: 11, fontWeight: 500,
+                color: "rgba(109,40,217,0.7)",
+                background: "rgba(139,92,246,0.1)",
+                border: "1px solid rgba(139,92,246,0.2)",
+                borderRadius: 100,
+                padding: "3px 10px",
+                flexShrink: 0,
+                letterSpacing: "0.02em",
+              }}>
+                guest
+              </span>
+            )}
 
             {/* Avatar + dropdown: user initial, dark/light toggle, logout */}
             <div style={{ position: "relative", flexShrink: 0 }}>

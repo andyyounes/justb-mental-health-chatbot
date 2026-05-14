@@ -109,6 +109,7 @@ export function AuthPage({ onAuthSuccess }: AuthPageProps) {
       {mode === "login" ? (
         <LoginForm
           onLogin={handleLogin}
+          onGuestLogin={() => handleLogin("guest", "justb2026")}
           onSwitchToSignup={() => {
             setMode("signup");
             setError(null);
