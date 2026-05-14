@@ -515,8 +515,7 @@ app.post("/make-server-97cb3ddd/chat", async (c) => {
 
     // ========== CRISIS TIER DETECTION ==========
     const actions: any[] = [];
-    const lowerMessage  = message.toLowerCase();
-    const lowerResponse = botResponse.toLowerCase();
+    const lowerMessage = message.toLowerCase();
 
     // TIER 3 — Imminent danger (FIRST, highest priority)
     const isTier3 =
@@ -598,8 +597,7 @@ app.post("/make-server-97cb3ddd/chat", async (c) => {
         lowerMessage.includes("anxious") ||
         lowerMessage.includes("anxiety") ||
         lowerMessage.includes("panic") ||
-        lowerMessage.includes("worried") ||
-        lowerResponse.includes("anxiety")
+        lowerMessage.includes("worried")
       ) {
         const anxietyExercises = [
           { id: "478-breathing", type: "exercise", title: "4-7-8 Breathing Technique", description: "A calming breath pattern: inhale for 4, hold for 7, exhale for 8", duration: "3 minutes" },
@@ -612,8 +610,7 @@ app.post("/make-server-97cb3ddd/chat", async (c) => {
       } else if (
         lowerMessage.includes("stress") ||
         lowerMessage.includes("overwhelm") ||
-        lowerMessage.includes("tense") ||
-        lowerResponse.includes("stress")
+        lowerMessage.includes("tense")
       ) {
         const stressExercises = [
           { id: "pmr", type: "exercise", title: "Progressive Muscle Relaxation", description: "Release physical tension through systematic muscle relaxation", duration: "10 minutes" },
@@ -647,9 +644,7 @@ app.post("/make-server-97cb3ddd/chat", async (c) => {
         lowerMessage.includes("schedule") ||
         lowerMessage.includes("routine") ||
         lowerMessage.includes("habit") ||
-        lowerMessage.includes("plan") ||
-        lowerResponse.includes("schedule") ||
-        lowerResponse.includes("routine")
+        lowerMessage.includes("plan")
       ) {
         actions.push(
           { id: "morning-task", type: "task", title: "Morning Mindfulness", description: "Start your day with 5 minutes of meditation or journaling", time: "7:30 AM" },
