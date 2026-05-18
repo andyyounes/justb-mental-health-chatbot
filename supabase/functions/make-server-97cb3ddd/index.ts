@@ -615,7 +615,7 @@ app.post("/make-server-97cb3ddd/chat", async (c) => {
     // TIER 1 — Passive ideation / hopelessness
     const isTier1 =
       lowerMessage.includes("don't want to be here") ||
-      lowerMessage.includes("wish i could disappear") ||
+      /wish.{0,15}dis{1,2}a{1,2}p{1,2}ear/i.test(message) ||
       lowerMessage.includes("nobody would miss me") ||
       lowerMessage.includes("life isn't worth") ||
       lowerMessage.includes("tired of everything") ||
