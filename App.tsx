@@ -644,6 +644,7 @@ export default function App() {
           body: JSON.stringify({
             message: text,
             chatHistory,
+            sessionId: currentSessionId,
           }),
         }
       );

@@ -132,6 +132,50 @@ function detectInjectionAttempt(message: string): boolean {
 }
 
 // ============================================================
+// CROSS-SESSION HISTORY RETRIEVAL
+// Loads the last N messages from the user's other recent sessions
+// so Groq has context from previous conversations.
+// ============================================================
+async function getCrossSessionHistory(
+  userId: string,
+  currentSessionId: string | null,
+  limit: number,
+): Promise<Array<{ role: string; content: string }>> {
+  try {
+    const allSessionIds: string[] = (await kv.get(`user:${userId}:sessions`)) || [];
+
+    // Exclude current session — its messages are already in chatHistory from the frontend
+    const otherIds = allSessionIds.filter((id) => id !== currentSessionId);
+    if (otherIds.length === 0) return [];
+
+    // Take the 3 most recently pushed session IDs (array is push-ordered, most recent = last)
+    const recentIds = otherIds.slice(-3);
+
+    const allMessages: Array<{ role: string; content: string; createdAt: string }> = [];
+
+    for (const sid of recentIds) {
+      const msgs: any[] = (await kv.get(`user:${userId}:session:${sid}:messages`)) || [];
+      for (const msg of msgs) {
+        allMessages.push({
+          role: msg.isBot ? "assistant" : "user",
+          content: msg.text ?? "",
+          createdAt: msg.createdAt ?? "",
+        });
+      }
+    }
+
+    // Sort chronologically and return the last `limit` messages
+    allMessages.sort(
+      (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
+    );
+
+    return allMessages.slice(-limit).map(({ role, content }) => ({ role, content }));
+  } catch {
+    return [];
+  }
+}
+
+// ============================================================
 // RAG CONTEXT RETRIEVAL FROM PINECONE
 // Gracefully skips if keys not configured or index not seeded.
 // ============================================================
@@ -428,7 +472,7 @@ app.post("/make-server-97cb3ddd/chat", async (c) => {
       return c.json({ error: "Unauthorized" }, 401);
     }
 
-    const { message, chatHistory } = await c.req.json();
+    const { message, chatHistory, sessionId } = await c.req.json();
     if (!message) return c.json({ error: "Message is required" }, 400);
 
     const groqApiKey = Deno.env.get("GROQ_API_KEY");
@@ -465,8 +509,23 @@ app.post("/make-server-97cb3ddd/chat", async (c) => {
       systemPrompt = securityNotice + systemPrompt;
     }
 
+    // ── 5. Cross-session memory — inject previous session context ─────
+    const crossSessionHistory = await getCrossSessionHistory(
+      user.id,
+      sessionId ?? null,
+      20,
+    );
+
+    if (crossSessionHistory.length > 0) {
+      systemPrompt +=
+        `\n\nRETURNING USER CONTEXT: This user has spoken with you before. ` +
+        `The conversation history below begins with messages from previous sessions — ` +
+        `use them to remember what the user has shared and maintain continuity across conversations.`;
+    }
+
     const chatMessages = [
-      ...(chatHistory || []),
+      ...crossSessionHistory,   // previous sessions (oldest → newest)
+      ...(chatHistory || []),   // current session
       { role: "user", content: message },
     ];
 
