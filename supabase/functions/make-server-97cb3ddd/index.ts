@@ -1027,4 +1027,15 @@ app.patch("/make-server-97cb3ddd/chat/sessions/:sessionId", async (c) => {
   }
 });
 
-Deno.serve(app.fetch);
+// Routes above are registered under /make-server-97cb3ddd/*. Depending on how the
+// function is deployed/invoked, the runtime may hand us the path with or without
+// that prefix (404 → the client shows "having trouble connecting"). Accept both.
+const ROUTE_PREFIX = "/make-server-97cb3ddd";
+Deno.serve((req) => {
+  const url = new URL(req.url);
+  if (!url.pathname.startsWith(ROUTE_PREFIX)) {
+    url.pathname = ROUTE_PREFIX + (url.pathname === "/" ? "" : url.pathname);
+    return app.fetch(new Request(url, req));
+  }
+  return app.fetch(req);
+});
